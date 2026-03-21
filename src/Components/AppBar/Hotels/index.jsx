@@ -9,6 +9,7 @@ import { fetchAllHotels,addToCartAPI } from "../../../apis";
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import SearchBar from "./SearchBar/SearchBar";
+import MaintenancePage from "../../../maintenance/maintenancePage";
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -32,7 +33,9 @@ const Hotels = () => {
   if (loading) {
     return <Typography variant="h6">Đang tải dữ liệu...</Typography>;
   }
-
+if(Array.isArray(hotels) && hotels.length === 0){
+  return <MaintenancePage/>
+}
   const handleViewDetails = (hotelId) => {
     navigate(`/account/HotelDetail/${hotelId}`);  
   };
